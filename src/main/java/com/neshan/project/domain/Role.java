@@ -1,14 +1,14 @@
 package com.neshan.project.domain;
 
 import com.neshan.project.myEnum.AvailableRole;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "roles")
 public class Role {
     @Id
