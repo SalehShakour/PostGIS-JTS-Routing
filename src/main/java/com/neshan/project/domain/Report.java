@@ -2,9 +2,8 @@ package com.neshan.project.domain;
 
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.locationtech.jts.geom.Geometry;
 import java.time.LocalDateTime;
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="report_type",
         discriminatorType = DiscriminatorType.STRING)
-@NoArgsConstructor
+
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

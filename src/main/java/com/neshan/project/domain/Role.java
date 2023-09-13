@@ -1,7 +1,7 @@
 package com.neshan.project.domain;
 
 import com.neshan.project.myEnum.AvailableRole;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -10,7 +10,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "roles")
-@NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue

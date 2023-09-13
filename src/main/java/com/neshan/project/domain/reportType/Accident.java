@@ -6,16 +6,13 @@ import com.neshan.project.domain.User;
 import com.neshan.project.myEnum.AccidentSeverity;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import javax.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.locationtech.jts.geom.Geometry;
 
 @Entity
 @DiscriminatorValue("accident")
-@NoArgsConstructor
 @Getter
 @Setter
 public class Accident extends Report {

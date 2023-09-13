@@ -4,16 +4,14 @@ import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import javax.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 import org.locationtech.jts.geom.Geometry;
 
 @Entity
 @DiscriminatorValue("bump")
-@NoArgsConstructor
 @Getter
 @Setter
 public class Bump extends Report {
