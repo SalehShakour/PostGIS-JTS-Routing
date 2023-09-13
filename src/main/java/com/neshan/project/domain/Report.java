@@ -36,6 +36,9 @@ public class Report {
     @Column(name = "type", nullable = false, length = 20)
     private String type;
 
+    @Column(name = "rating",columnDefinition = "integer default 5")
+    private int rating;
+
     public Report(User user, Geometry geom, ReportStatus status, ReportType type){
         this.user = user;
         this.geometry = geom;
