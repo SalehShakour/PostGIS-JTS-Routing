@@ -19,6 +19,7 @@ public class Role {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Role(AvailableRole roleEnum,User user) {

@@ -3,9 +3,7 @@ package com.neshan.project.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -36,6 +34,9 @@ public class User {
     private String phoneNumber;
     @Column(name = "address")
     private String address;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Report> reports = new ArrayList<>();
 
     @Override
     public String toString() {
