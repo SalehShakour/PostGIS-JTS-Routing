@@ -2,8 +2,8 @@ package com.neshan.project.myEnum.converter;
 
 import com.neshan.project.myEnum.Side;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
 public class SideConverter implements AttributeConverter<Side, Integer> {
