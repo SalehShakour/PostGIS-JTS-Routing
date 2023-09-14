@@ -13,6 +13,7 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,9 @@ public class ReportController {
 
 
     @PostMapping("/accident")
-    public ResponseEntity<String> addAccident(@RequestBody AccidentDTO accidentDTO){
+    public ResponseEntity<String> addAccident(@AuthenticationPrincipal User currentUser, @RequestBody AccidentDTO accidentDTO){
         Point point = accidentReportService.convertToGeom(accidentDTO.point());
-        User user = new User();
-        userRepository.save(user);
-        Accident accident = new Accident(user,point,accidentDTO.severity());
+        Accident accident = new Accident(currentUser,point,accidentDTO.severity());
         accidentReportService.save(accident);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
