@@ -52,6 +52,16 @@ public class User {
         return -1L;
     }
 
+    public boolean hasRole(String roleName) {
+        for (Role role : roles
+        ) {
+            if (role.getName().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addRole(Role role) {
         roles.add(role);
     }
