@@ -28,10 +28,6 @@ public class User {
     private String lastname;
     @Column(name = "password")
     private String password;
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    @Column(name = "address")
-    private String address;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Report> reports = new ArrayList<>();
@@ -43,8 +39,6 @@ public class User {
                 ", roles=" + roles.toString() +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", address='" + address + '\'' +
                 '}';
     }
 
