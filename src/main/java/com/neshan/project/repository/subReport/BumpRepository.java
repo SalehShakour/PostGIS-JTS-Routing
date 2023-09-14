@@ -1,4 +1,4 @@
-package com.neshan.project.repository.reportRepository;
+package com.neshan.project.repository.subReport;
 
 import com.neshan.project.domain.reportType.Bump;
 import org.springframework.data.jpa.repository.JpaRepository;
