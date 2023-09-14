@@ -14,10 +14,10 @@ import org.locationtech.jts.geom.Geometry;
 @Setter
 @NoArgsConstructor
 public class Camera extends Report {
-    private String cameraSide;
+    private Side cameraSide;
 
     public Camera(User user, Geometry geom, Side side) {
         super(user, geom, ReportStatus.PENDING, ReportType.CAMERA);
-        this.cameraSide = side.name();
+        this.cameraSide = side;
     }
 }

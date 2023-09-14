@@ -2,8 +2,8 @@ package com.neshan.project.domain;
 
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
 import java.time.LocalDateTime;
@@ -30,11 +30,11 @@ public class Report {
     @Column(name = "creation_time")
     private LocalDateTime creationTime;
 
-    @Column(name = "status", nullable = false, length = 20)
-    private String status;
+    @Column(name = "status")
+    private ReportStatus status;
 
-    @Column(name = "type", nullable = false, length = 20)
-    private String type;
+    @Column(name = "type")
+    private ReportType type;
 
     @Column(name = "rating",columnDefinition = "integer default 5")
     private int rating;
@@ -43,8 +43,8 @@ public class Report {
         this.user = user;
         this.geometry = geom;
         this.creationTime = LocalDateTime.now();
-        this.status = status.name();
-        this.type = type.name();
+        this.status = status;
+        this.type = type;
     }
 
 }

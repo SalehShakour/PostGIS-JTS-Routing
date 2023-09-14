@@ -14,10 +14,10 @@ import org.locationtech.jts.geom.Geometry;
 @Setter
 @NoArgsConstructor
 public class Traffic extends Report {
-    private String trafficType;
+    private TrafficType trafficType;
 
     public Traffic(User user, Geometry geom, TrafficType type) {
         super(user, geom, ReportStatus.PENDING, ReportType.TRAFFIC);
-        this.trafficType = type.name();
+        this.trafficType = type;
     }
 }

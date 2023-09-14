@@ -16,11 +16,11 @@ import org.locationtech.jts.geom.Geometry;
 @NoArgsConstructor
 public class Accident extends Report {
 
-    private String severity;
+    private AccidentSeverity severity;
 
     public Accident(User user, Geometry geom, AccidentSeverity severity) {
         super(user, geom, ReportStatus.PENDING, ReportType.ACCIDENT);
-        this.severity = severity.name();
+        this.severity = severity;
     }
 
 }
