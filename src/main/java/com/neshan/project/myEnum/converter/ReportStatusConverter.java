@@ -1,7 +1,6 @@
 package com.neshan.project.myEnum.converter;
 
 import com.neshan.project.myEnum.ReportStatus;
-import com.neshan.project.myEnum.Side;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

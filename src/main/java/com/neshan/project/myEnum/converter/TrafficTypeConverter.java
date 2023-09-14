@@ -1,6 +1,5 @@
 package com.neshan.project.myEnum.converter;
 
-import com.neshan.project.myEnum.Side;
 import com.neshan.project.myEnum.TrafficType;
 
 import jakarta.persistence.AttributeConverter;
