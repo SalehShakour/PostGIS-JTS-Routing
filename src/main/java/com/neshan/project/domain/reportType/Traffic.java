@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @DiscriminatorValue("traffic")
@@ -16,8 +17,8 @@ import org.locationtech.jts.geom.Geometry;
 public class Traffic extends Report {
     private TrafficType trafficType;
 
-    public Traffic(User user, Geometry geom, TrafficType type) {
-        super(user, geom, ReportStatus.PENDING, ReportType.TRAFFIC);
+    public Traffic(User user, Point point, TrafficType type) {
+        super(user, point, ReportStatus.PENDING, ReportType.TRAFFIC);
         this.trafficType = type;
     }
 }

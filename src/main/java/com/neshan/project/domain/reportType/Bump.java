@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @DiscriminatorValue("bump")
@@ -16,7 +17,7 @@ import org.locationtech.jts.geom.Geometry;
 @Setter
 @NoArgsConstructor
 public class Bump extends Report {
-    public Bump(User user, Geometry geom){
-        super(user,geom, ReportStatus.PENDING, ReportType.BUMP);
+    public Bump(User user, Point point){
+        super(user,point, ReportStatus.PENDING, ReportType.BUMP);
     }
 }

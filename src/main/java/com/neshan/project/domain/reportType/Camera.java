@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @DiscriminatorValue("camera")
@@ -16,8 +17,8 @@ import org.locationtech.jts.geom.Geometry;
 public class Camera extends Report {
     private Side cameraSide;
 
-    public Camera(User user, Geometry geom, Side side) {
-        super(user, geom, ReportStatus.PENDING, ReportType.CAMERA);
+    public Camera(User user, Point point, Side side) {
+        super(user, point, ReportStatus.PENDING, ReportType.CAMERA);
         this.cameraSide = side;
     }
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @DiscriminatorValue("accident")
@@ -18,8 +19,8 @@ public class Accident extends Report {
 
     private AccidentSeverity severity;
 
-    public Accident(User user, Geometry geom, AccidentSeverity severity) {
-        super(user, geom, ReportStatus.PENDING, ReportType.ACCIDENT);
+    public Accident(User user, Point point, AccidentSeverity severity) {
+        super(user, point, ReportStatus.PENDING, ReportType.ACCIDENT);
         this.severity = severity;
     }
 

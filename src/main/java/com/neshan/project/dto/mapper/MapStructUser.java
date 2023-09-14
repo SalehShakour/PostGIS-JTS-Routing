@@ -1,4 +1,4 @@
-package com.neshan.project.mapper;
+package com.neshan.project.dto.mapper;
 
 import com.neshan.project.domain.User;
 import com.neshan.project.dto.UserDTO;

@@ -5,7 +5,8 @@ import com.neshan.project.myEnum.ReportType;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @DiscriminatorColumn(name="report_type",
         discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
+@Table(name = "reports")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +26,8 @@ public class Report {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "geometry")
-    private Geometry geometry;
+    @Column(name = "point")
+    private Point point;
 
     @Column(name = "creation_time")
     private LocalDateTime creationTime;
@@ -36,12 +38,12 @@ public class Report {
     @Column(name = "type")
     private ReportType type;
 
-    @Column(name = "rating",columnDefinition = "integer default 5")
-    private int rating;
+    @Column(name = "rating")
+    private int rating = 5;
 
-    public Report(User user, Geometry geom, ReportStatus status, ReportType type){
+    public Report(User user, Point point, ReportStatus status, ReportType type){
         this.user = user;
-        this.geometry = geom;
+        this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
         this.type = type;

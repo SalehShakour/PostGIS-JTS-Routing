@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @DiscriminatorValue("police")
@@ -16,8 +17,8 @@ import org.locationtech.jts.geom.Geometry;
 public class Police extends Report {
     private Side policeSide;
 
-    public Police(User user, Geometry geom, Side policeSide) {
-        super(user, geom, ReportStatus.PENDING, ReportType.POLICE);
+    public Police(User user, Point point, Side policeSide) {
+        super(user, point, ReportStatus.PENDING, ReportType.POLICE);
         this.policeSide = policeSide;
     }
 }
