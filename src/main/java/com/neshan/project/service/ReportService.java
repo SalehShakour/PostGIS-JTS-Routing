@@ -3,14 +3,16 @@ package com.neshan.project.service;
 // Import the necessary packages
 
 import com.neshan.project.domain.Report;
+import com.neshan.project.domain.User;
+import com.neshan.project.domain.reportType.Accident;
+import com.neshan.project.dto.AccidentDTO;
 import com.neshan.project.dto.PointDTO;
 import com.neshan.project.exception.CustomException;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.io.ParseException;
+import org.locationtech.jts.io.WKTReader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,22 +23,30 @@ import java.util.List;
 public class ReportService<T extends Report> {
 
     private final ReportRepository<T> repository;
+    private final WKTReader wktReader;
 
     public T reportValidation(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new CustomException("Report not found"));
     }
-    public Point convertToGeom(PointDTO pointDTO){
-        System.out.println("is ok !!!!!!!!!!!!!!!!!!");
-        GeometryFactory geometryFactory = new GeometryFactory();
-        Point point = geometryFactory.createPoint(new Coordinate(pointDTO.getX(), pointDTO.getY()));
-        System.out.println(point.toString());
+    public Point createPoint(PointDTO pointDTO){
+        Point point;
+        String wellKnownText = String.format("POINT(%f %f)", pointDTO.getX(),pointDTO.getY());
+        try {
+            point = (Point) wktReader.read(wellKnownText);
+        } catch (ParseException e) {
+            throw new CustomException(e.getMessage());
+        }
         return point;
+    }
+    public Accident createAccident(User currentUser, AccidentDTO accidentDTO){
+        Point point = createPoint(accidentDTO.pointDTO());
+        return new Accident(currentUser,point,accidentDTO.severity());
     }
 
     @Transactional
-    public T save(T report) {
-        return repository.save(report);
+    public void save(T report) {
+        repository.save(report);
     }
 
     @Transactional(readOnly = true)

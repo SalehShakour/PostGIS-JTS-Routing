@@ -2,6 +2,7 @@ package com.neshan.project.config;
 
 import com.neshan.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.io.WKTReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,4 +48,8 @@ public class ApplicationConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public WKTReader wktReader(){
+        return new WKTReader();
+    }
 }
