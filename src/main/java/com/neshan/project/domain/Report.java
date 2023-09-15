@@ -35,19 +35,15 @@ public class Report {
     @Column(name = "status")
     private ReportStatus status;
 
-    @Column(name = "type")
-    private ReportType type;
-
     @Column(name = "rating")
     private int rating = 5;
 
-    public Report(User user, Point point, ReportStatus status, ReportType type){
+    public Report(User user, Point point, ReportStatus status){
         this.user = user;
         point.setSRID(4326);
         this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
-        this.type = type;
     }
 
 }

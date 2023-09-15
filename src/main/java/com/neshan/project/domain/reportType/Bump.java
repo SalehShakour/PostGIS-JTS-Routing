@@ -12,12 +12,12 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 
 @Entity
-@DiscriminatorValue("bump")
+@DiscriminatorValue("BUMP")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Bump extends Report {
     public Bump(User user, Point point){
-        super(user,point, ReportStatus.PENDING, ReportType.BUMP);
+        super(user,point, ReportStatus.PENDING);
     }
 }

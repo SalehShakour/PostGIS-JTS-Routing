@@ -10,7 +10,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 
 @Entity
-@DiscriminatorValue("camera")
+@DiscriminatorValue("CAMERA")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +18,7 @@ public class Camera extends Report {
     private Side cameraSide;
 
     public Camera(User user, Point point, Side side) {
-        super(user, point, ReportStatus.PENDING, ReportType.CAMERA);
+        super(user, point, ReportStatus.PENDING);
         this.cameraSide = side;
     }
 }

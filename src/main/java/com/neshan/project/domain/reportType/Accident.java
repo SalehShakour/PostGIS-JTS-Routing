@@ -11,7 +11,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 
 @Entity
-@DiscriminatorValue("accident")
+@DiscriminatorValue("ACCIDENT")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class Accident extends Report {
     private AccidentSeverity severity;
 
     public Accident(User user, Point point, AccidentSeverity severity) {
-        super(user, point, ReportStatus.PENDING, ReportType.ACCIDENT);
+        super(user, point, ReportStatus.PENDING);
         this.severity = severity;
     }
 
