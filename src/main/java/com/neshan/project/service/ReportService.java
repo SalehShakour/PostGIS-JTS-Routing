@@ -4,12 +4,10 @@ package com.neshan.project.service;
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
-import com.neshan.project.domain.reportType.Accident;
-import com.neshan.project.domain.reportType.Bump;
-import com.neshan.project.domain.reportType.Camera;
-import com.neshan.project.domain.reportType.Police;
+import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.*;
 import com.neshan.project.exception.CustomException;
+import com.neshan.project.myEnum.Side;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
 import org.locationtech.jts.geom.Point;
@@ -52,23 +50,49 @@ public class ReportService<T extends Report> {
         return repository.findAll();
     }
 
-    public Bump createBumpObject(User currentUser, BumpDTO bumpDTO) {
+    public Bump createBumpObject(User currentUser,
+                                 BumpDTO bumpDTO) {
+
         Point point = createPoint(bumpDTO.pointDTO());
-        return new Bump(currentUser, point);
+        return new Bump(
+                currentUser, point, bumpDTO.pointDTO().getDegree(), bumpDTO.side()
+        );
     }
 
-    public Accident createAccidentObject(User currentUser, AccidentDTO accidentDTO) {
+    public Accident createAccidentObject(User currentUser,
+                                         AccidentDTO accidentDTO) {
+
         Point point = createPoint(accidentDTO.pointDTO());
-        return new Accident(currentUser, point, accidentDTO.severity());
+        return new Accident(
+                currentUser, point, accidentDTO.severity(), accidentDTO.pointDTO().getDegree(), accidentDTO.side()
+        );
     }
 
-    public Camera createCameraObject(User currentUser, CameraDTO cameraDTO) {
+    public Camera createCameraObject(User currentUser,
+                                     CameraDTO cameraDTO) {
+
         Point point = createPoint(cameraDTO.pointDTO());
-        return new Camera(currentUser, point, cameraDTO.side());
+        return new Camera(
+                currentUser, point, cameraDTO.pointDTO().getDegree(), cameraDTO.side()
+        );
     }
-    public Police createPoliceObject(User currentUser, PoliceDTO policeDTO) {
+
+    public Police createPoliceObject(User currentUser,
+                                     PoliceDTO policeDTO) {
+
         Point point = createPoint(policeDTO.pointDTO());
-        return new Police(currentUser, point, policeDTO.side());
+        return new Police(
+                currentUser, point, policeDTO.pointDTO().getDegree(), policeDTO.side()
+        );
+    }
+
+    public Traffic createTrafficObject(User currentUser,
+                                       TrafficDTO trafficDTO) {
+
+        Point point = createPoint(trafficDTO.pointDTO());
+        return new Traffic(
+                currentUser, point, trafficDTO.trafficType(), trafficDTO.pointDTO().getDegree(), trafficDTO.side()
+        );
     }
 
 
@@ -83,6 +107,7 @@ public class ReportService<T extends Report> {
         }
         return point;
     }
+
 
 }
 

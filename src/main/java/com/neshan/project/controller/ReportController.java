@@ -1,14 +1,8 @@
 package com.neshan.project.controller;
 
 import com.neshan.project.domain.User;
-import com.neshan.project.domain.reportType.Accident;
-import com.neshan.project.domain.reportType.Bump;
-import com.neshan.project.domain.reportType.Camera;
-import com.neshan.project.domain.reportType.Police;
-import com.neshan.project.dto.AccidentDTO;
-import com.neshan.project.dto.BumpDTO;
-import com.neshan.project.dto.CameraDTO;
-import com.neshan.project.dto.PoliceDTO;
+import com.neshan.project.domain.reportType.*;
+import com.neshan.project.dto.*;
 import com.neshan.project.repository.UserRepository;
 import com.neshan.project.service.ReportService;
 import lombok.AllArgsConstructor;
@@ -26,6 +20,7 @@ public class ReportController {
     private final ReportService<Bump> bumpService;
     private final ReportService<Camera> cameraService;
     private final ReportService<Police> policeService;
+    private final ReportService<Traffic> trafficService;
     private final UserRepository userRepository;
 
 
@@ -51,6 +46,12 @@ public class ReportController {
     public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
                                                @RequestBody PoliceDTO policeDTO){
         policeService.save(policeService.createPoliceObject(currentUser, policeDTO));
+        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
+    }
+    @PostMapping("/traffic")
+    public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
+                                               @RequestBody TrafficDTO trafficDTO){
+        trafficService.save(trafficService.createTrafficObject(currentUser, trafficDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
     }
 }

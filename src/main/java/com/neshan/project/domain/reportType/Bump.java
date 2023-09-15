@@ -4,6 +4,7 @@ import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
+import com.neshan.project.myEnum.Side;
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -18,7 +19,7 @@ import org.locationtech.jts.geom.Point;
 @NoArgsConstructor
 public class Bump extends Report {
 
-    public Bump(User user, Point point, double degree) {
-        super(user, point, ReportStatus.PENDING, degree);
+    public Bump(User user, Point point, double degree, Side side) {
+        super(user, point, ReportStatus.PENDING, degree, side);
     }
 }
