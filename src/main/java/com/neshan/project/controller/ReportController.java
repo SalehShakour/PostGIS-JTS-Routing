@@ -21,7 +21,6 @@ public class ReportController {
     private final ReportService<Camera> cameraService;
     private final ReportService<Police> policeService;
     private final ReportService<Traffic> trafficService;
-    private final UserRepository userRepository;
 
 
     @PostMapping("/accident")

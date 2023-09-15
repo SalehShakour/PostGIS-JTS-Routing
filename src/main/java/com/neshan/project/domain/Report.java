@@ -39,20 +39,19 @@ public class Report {
     @Column(name = "degree")
     private double degree;
 
-    @Column(name = "side")
-    private Side side;
-
     @Column(name = "rating")
     private int rating = 5;
 
-    public Report(User user, Point point, ReportStatus status, double degree, Side side){
+    public Report(
+            User user, Point point, ReportStatus status, double degree, Side side
+    ){
         this.user = user;
         point.setSRID(4326);
         this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
+        if (side.equals(Side.OPPOSITE)) degree = (degree + 180) % 360;
         this.degree = degree;
-        this.side = side;
     }
 
     public static Side getSide(double degree1, double degree2){
