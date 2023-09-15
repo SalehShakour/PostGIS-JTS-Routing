@@ -5,6 +5,5 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.locationtech.jts.geom.Point;
 
-public record BumpDTO(@NotNull @NotBlank Point point,
-                      @NotNull @NotBlank AccidentSeverity severity) {
+public record BumpDTO(@NotNull @NotBlank PointDTO pointDTO) {
 }

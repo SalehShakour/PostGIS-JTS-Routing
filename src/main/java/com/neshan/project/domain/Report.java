@@ -43,6 +43,7 @@ public class Report {
 
     public Report(User user, Point point, ReportStatus status, ReportType type){
         this.user = user;
+        point.setSRID(4326);
         this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
