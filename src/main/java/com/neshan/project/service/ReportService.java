@@ -6,8 +6,10 @@ import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.domain.reportType.Accident;
 import com.neshan.project.domain.reportType.Bump;
+import com.neshan.project.domain.reportType.Camera;
 import com.neshan.project.dto.AccidentDTO;
 import com.neshan.project.dto.BumpDTO;
+import com.neshan.project.dto.CameraDTO;
 import com.neshan.project.dto.PointDTO;
 import com.neshan.project.exception.CustomException;
 import com.neshan.project.repository.ReportRepository;
@@ -54,20 +56,24 @@ public class ReportService<T extends Report> {
 
     public Bump createBump(User currentUser, BumpDTO bumpDTO) {
         Point point = createPoint(bumpDTO.pointDTO());
-        return new Bump(currentUser,point);
+        return new Bump(currentUser, point);
     }
-    public Accident createAccident(User currentUser, AccidentDTO accidentDTO){
+
+    public Accident createAccident(User currentUser, AccidentDTO accidentDTO) {
         Point point = createPoint(accidentDTO.pointDTO());
-        return new Accident(currentUser,point,accidentDTO.severity());
+        return new Accident(currentUser, point, accidentDTO.severity());
+    }
+
+    public Camera createCamera(User currentUser, CameraDTO cameraDTO) {
+        Point point = createPoint(cameraDTO.pointDTO());
+        return new Camera(currentUser, point, cameraDTO.side());
     }
 
 
-
-
-    public Point createPoint(PointDTO pointDTO){
+    public Point createPoint(PointDTO pointDTO) {
         Point point;
         System.out.println(pointDTO.getX());
-        String wellKnownText = String.format("POINT(%.6f %.6f)", pointDTO.getX(),pointDTO.getY());
+        String wellKnownText = String.format("POINT(%.6f %.6f)", pointDTO.getX(), pointDTO.getY());
         try {
             point = (Point) wktReader.read(wellKnownText);
         } catch (ParseException e) {
@@ -75,5 +81,7 @@ public class ReportService<T extends Report> {
         }
         return point;
     }
+
+
 }
 
