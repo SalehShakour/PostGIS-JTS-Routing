@@ -2,7 +2,6 @@ package com.neshan.project.auth;
 
 
 import com.neshan.project.domain.Role;
-import com.neshan.project.repository.RoleRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
