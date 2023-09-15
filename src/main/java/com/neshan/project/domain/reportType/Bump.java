@@ -17,7 +17,8 @@ import org.locationtech.jts.geom.Point;
 @Setter
 @NoArgsConstructor
 public class Bump extends Report {
-    public Bump(User user, Point point){
-        super(user,point, ReportStatus.PENDING);
+
+    public Bump(User user, Point point, double degree) {
+        super(user, point, ReportStatus.PENDING, degree);
     }
 }

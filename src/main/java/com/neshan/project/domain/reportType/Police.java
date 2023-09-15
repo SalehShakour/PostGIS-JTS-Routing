@@ -15,10 +15,8 @@ import org.locationtech.jts.geom.Point;
 @Setter
 @NoArgsConstructor
 public class Police extends Report {
-    private Side policeSide;
 
-    public Police(User user, Point point, Side policeSide) {
-        super(user, point, ReportStatus.PENDING);
-        this.policeSide = policeSide;
+    public Police(User user, Point point, Side policeSide, double degree) {
+        super(user, point, ReportStatus.PENDING, degree);
     }
 }

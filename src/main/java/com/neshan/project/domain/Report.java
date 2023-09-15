@@ -3,6 +3,7 @@ package com.neshan.project.domain;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
 
+import com.neshan.project.myEnum.Side;
 import jakarta.persistence.*;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
@@ -35,15 +36,28 @@ public class Report {
     @Column(name = "status")
     private ReportStatus status;
 
+    @Column(name = "degree")
+    private double degree;
+
     @Column(name = "rating")
     private int rating = 5;
 
-    public Report(User user, Point point, ReportStatus status){
+    public Report(User user, Point point, ReportStatus status, double degree){
         this.user = user;
         point.setSRID(4326);
         this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
+        this.degree = degree;
+    }
+
+    public static Side getSide(double degree1, double degree2){
+        double difference = Math.abs((degree1 - degree2 + 360) % 360);
+        if (difference <= 90) {
+            return Side.SAME;
+        } else {
+            return Side.OPPOSITE;
+        }
     }
 
 }

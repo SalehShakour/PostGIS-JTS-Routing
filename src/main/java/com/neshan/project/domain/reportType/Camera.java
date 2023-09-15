@@ -15,10 +15,8 @@ import org.locationtech.jts.geom.Point;
 @Setter
 @NoArgsConstructor
 public class Camera extends Report {
-    private Side cameraSide;
 
-    public Camera(User user, Point point, Side side) {
-        super(user, point, ReportStatus.PENDING);
-        this.cameraSide = side;
+    public Camera(User user, Point point, Side side, double degree) {
+        super(user, point, ReportStatus.PENDING, degree);
     }
 }

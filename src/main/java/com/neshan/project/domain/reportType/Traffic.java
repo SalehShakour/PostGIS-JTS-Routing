@@ -15,10 +15,11 @@ import org.locationtech.jts.geom.Point;
 @Setter
 @NoArgsConstructor
 public class Traffic extends Report {
+
     private TrafficType trafficType;
 
-    public Traffic(User user, Point point, TrafficType type) {
-        super(user, point, ReportStatus.PENDING);
+    public Traffic(User user, Point point, TrafficType type, double degree) {
+        super(user, point, ReportStatus.PENDING, degree);
         this.trafficType = type;
     }
 }
