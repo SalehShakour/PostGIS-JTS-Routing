@@ -17,11 +17,11 @@ import org.locationtech.jts.geom.Point;
 @NoArgsConstructor
 public class Accident extends Report {
 
-    private AccidentSeverity severity;
+    private AccidentSeverity accidentSeverity;
 
     public Accident(User user, Point point, AccidentSeverity severity, double degree, Side side) {
         super(user, point, ReportStatus.PENDING, degree, side);
-        this.severity = severity;
+        this.accidentSeverity = severity;
     }
 
 }
