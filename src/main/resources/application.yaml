@@ -7,6 +7,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/final-project
     username: postgres
     password: 1441
-#  data:
-#    redis:
-#      url: redis://127.0.0.1:6379
+  data:
+    redis:
+      url: redis://127.0.0.1:6379

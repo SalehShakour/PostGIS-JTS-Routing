@@ -1,5 +1,7 @@
 package com.neshan.project.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.PointDTO;
@@ -15,10 +17,14 @@ import org.locationtech.jts.io.WKTReader;
 import org.locationtech.jts.operation.distance.DistanceOp;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.neshan.project.cache.CacheInitializer.expireReportIdSet;
 
 @Service
 @AllArgsConstructor
@@ -40,9 +46,13 @@ public class RouteService {
     public List<ReportDTO> routeAnalysis(LineString lineString) {
         List<ReportDTO> pointsWithinDistance = new ArrayList<>();
         List<Report> reports = reportRepo.findReportsWithinDistance(lineString, 10);
-
         for (Report report : reports) {
-            Map<String, Object> additionalInfo = new HashMap<>(); // Create a map for additional information
+            if (report.getCreationTime().plusMinutes(report.getRating() * 2L)
+                    .isBefore(LocalDateTime.now())) {
+                expireReportIdSet.add(report);
+                continue;
+            }
+            Map<String, Object> additionalInfo = new HashMap<>();
 
             switch (report.getType()) {
                 case ACCIDENT -> additionalInfo.put("severity", ((Accident) report).getAccidentSeverity().name());
