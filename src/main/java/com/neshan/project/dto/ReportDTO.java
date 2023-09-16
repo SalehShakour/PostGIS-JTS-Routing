@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record ReportDTO(@NotNull @NotBlank ReportType type,
                         String point,
-                        String config
+                        String additionalInformation
                         ) {
 
 }
