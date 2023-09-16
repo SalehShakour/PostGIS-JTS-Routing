@@ -10,6 +10,5 @@ import lombok.Setter;
 public class PointDTO {
     private double x;
     private double y;
-    private double degree;
 }
 

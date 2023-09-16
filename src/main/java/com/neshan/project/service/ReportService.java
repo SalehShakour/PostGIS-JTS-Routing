@@ -1,6 +1,5 @@
 package com.neshan.project.service;
 
-// Import the necessary packages
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
@@ -55,7 +54,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(bumpDTO.pointDTO());
         return new Bump(
-                currentUser, point, bumpDTO.pointDTO().getDegree(), bumpDTO.side()
+                currentUser, point, bumpDTO.side()
         );
     }
 
@@ -64,7 +63,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(accidentDTO.pointDTO());
         return new Accident(
-                currentUser, point, accidentDTO.severity(), accidentDTO.pointDTO().getDegree(), accidentDTO.side()
+                currentUser, point, accidentDTO.severity(), accidentDTO.side()
         );
     }
 
@@ -73,7 +72,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(cameraDTO.pointDTO());
         return new Camera(
-                currentUser, point, cameraDTO.pointDTO().getDegree(), cameraDTO.side()
+                currentUser, point, cameraDTO.side()
         );
     }
 
@@ -82,7 +81,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(policeDTO.pointDTO());
         return new Police(
-                currentUser, point, policeDTO.pointDTO().getDegree(), policeDTO.side()
+                currentUser, point, policeDTO.side()
         );
     }
 
@@ -91,7 +90,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(trafficDTO.pointDTO());
         return new Traffic(
-                currentUser, point, trafficDTO.trafficType(), trafficDTO.pointDTO().getDegree(), trafficDTO.side()
+                currentUser, point, trafficDTO.trafficType(), trafficDTO.side()
         );
     }
 

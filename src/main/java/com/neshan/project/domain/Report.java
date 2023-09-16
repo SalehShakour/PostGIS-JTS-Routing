@@ -36,22 +36,23 @@ public class Report {
     @Column(name = "status")
     private ReportStatus status;
 
-    @Column(name = "degree")
-    private double degree;
-
     @Column(name = "rating")
     private int rating = 5;
 
+    @Column(name = "type")
+    private ReportType type;
+
     public Report(
-            User user, Point point, ReportStatus status, double degree, Side side
+            User user, Point point,ReportType reportType,ReportStatus status, Side side
     ){
         this.user = user;
         point.setSRID(4326);
         this.point = point;
         this.creationTime = LocalDateTime.now();
         this.status = status;
-        if (side.equals(Side.OPPOSITE)) degree = (degree + 180) % 360;
-        this.degree = degree;
+        this.type = reportType;
+//        if (side.equals(Side.OPPOSITE)) degree = (degree + 180) % 360;
+//        this.degree = degree;
     }
 
     public static Side getSide(double degree1, double degree2){

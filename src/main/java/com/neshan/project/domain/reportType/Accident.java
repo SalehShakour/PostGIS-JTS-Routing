@@ -19,8 +19,8 @@ public class Accident extends Report {
 
     private AccidentSeverity accidentSeverity;
 
-    public Accident(User user, Point point, AccidentSeverity severity, double degree, Side side) {
-        super(user, point, ReportStatus.PENDING, degree, side);
+    public Accident(User user, Point point, AccidentSeverity severity, Side side) {
+        super(user, point, ReportType.ACCIDENT, ReportStatus.PENDING, side);
         this.accidentSeverity = severity;
     }
 
