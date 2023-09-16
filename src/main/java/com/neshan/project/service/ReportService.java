@@ -49,6 +49,12 @@ public class ReportService<T extends Report> {
         return repository.findAll();
     }
 
+    public void updateRating(Long id, int number){
+        T report = repository.findById(id).orElseThrow(()->new CustomException("Report not found."));
+        report.setRating(report.getRating()+number);
+        repository.save(report);
+    }
+
     public Bump createBumpObject(User currentUser,
                                  BumpDTO bumpDTO) {
 

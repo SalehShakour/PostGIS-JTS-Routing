@@ -1,5 +1,6 @@
 package com.neshan.project.controller;
 
+import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/reports")
 @AllArgsConstructor
 public class ReportController {
+    private final ReportService<Report> reportRepo;
     private final ReportService<Accident> accidentService;
     private final ReportService<Bump> bumpService;
     private final ReportService<Camera> cameraService;
@@ -29,28 +31,47 @@ public class ReportController {
         accidentService.save(accidentService.createAccidentObject(currentUser,accidentDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your accident report.");
     }
+
     @PostMapping("/bump")
     public ResponseEntity<String> reportBump(@AuthenticationPrincipal User currentUser,
                                               @RequestBody BumpDTO bumpDTO){
         bumpService.save(bumpService.createBumpObject(currentUser, bumpDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your bump report.");
     }
+
     @PostMapping("/camera")
     public ResponseEntity<String> reportCamera(@AuthenticationPrincipal User currentUser,
                                           @RequestBody CameraDTO cameraDTO){
         cameraService.save(cameraService.createCameraObject(currentUser, cameraDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your camera report.");
     }
+
     @PostMapping("/police")
     public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
                                                @RequestBody PoliceDTO policeDTO){
         policeService.save(policeService.createPoliceObject(currentUser, policeDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
     }
+
     @PostMapping("/traffic")
     public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
                                                @RequestBody TrafficDTO trafficDTO){
         trafficService.save(trafficService.createTrafficObject(currentUser, trafficDTO));
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
     }
+
+    @PutMapping("/like")
+    public ResponseEntity<String> likeReport(@AuthenticationPrincipal User currentUser,
+                                             @RequestParam Long id){
+        reportRepo.updateRating(id,1);
+        return ResponseEntity.status(HttpStatus.OK).body("Thank you for sending like.");
+    }
+
+    @PutMapping("/dislike")
+    public ResponseEntity<String> dislikeReport(@AuthenticationPrincipal User currentUser,
+                                             @RequestParam Long id){
+        reportRepo.updateRating(id,-1);
+        return ResponseEntity.status(HttpStatus.OK).body("Thank you for sending dislike.");
+    }
+
 }
