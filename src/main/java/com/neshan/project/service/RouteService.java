@@ -16,18 +16,16 @@ import org.locationtech.jts.operation.distance.DistanceOp;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class RouteService {
     private final WKTReader wktReader;
     private final ReportRepository<Report> reportRepo;
-    private final ReportRepository<Accident> accidentRepo;
-    private final ReportRepository<Traffic> trafficRepo;
-    private final ReportRepository<Bump> bumpRepo;
-    private final ReportRepository<Police> policeRepo;
-    private final ReportRepository<Camera> cameraRepo;
+
 
     public LineString toLinestring(String lineStringWkt) {
         try {
@@ -41,15 +39,26 @@ public class RouteService {
 
     public List<ReportDTO> routeAnalysis(LineString lineString) {
         List<ReportDTO> pointsWithinDistance = new ArrayList<>();
-        appendReport(lineString,pointsWithinDistance);
-        return pointsWithinDistance;
-    }
-    private void appendReport(LineString lineString, List<ReportDTO> pointsWithinDistance){
-        List<Report> reports = reportRepo.findReportsWithinDistance(lineString,1000);
-        for (Report accident: reports){
+        List<Report> reports = reportRepo.findReportsWithinDistance(lineString, 10);
+
+        for (Report report : reports) {
+            Map<String, Object> additionalInfo = new HashMap<>(); // Create a map for additional information
+
+            switch (report.getType()) {
+                case ACCIDENT -> additionalInfo.put("severity", ((Accident) report).getAccidentSeverity().name());
+                case TRAFFIC -> additionalInfo.put("trafficType", ((Traffic) report).getTrafficType().name());
+                default -> {
+                }
+            }
+
             pointsWithinDistance.add(new ReportDTO(
-                    accident.getType(),accident.getPoint().toString(), ""));
+                    report.getType(),
+                    report.getPoint().toString(),
+                    additionalInfo
+            ));
         }
+
+        return pointsWithinDistance;
     }
 
 }
