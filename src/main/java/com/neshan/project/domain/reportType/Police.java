@@ -17,6 +17,6 @@ import org.locationtech.jts.geom.Point;
 public class Police extends Report {
 
     public Police(User user, Point point) {
-        super(user, point, ReportType.POLICE, ReportStatus.PENDING);
+        super(user, point, ReportType.POLICE, ReportStatus.OPEN);
     }
 }

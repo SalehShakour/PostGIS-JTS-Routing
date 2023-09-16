@@ -20,6 +20,6 @@ import org.locationtech.jts.geom.Point;
 public class Bump extends Report {
 
     public Bump(User user, Point point) {
-        super(user, point, ReportType.BUMP, ReportStatus.PENDING);
+        super(user, point, ReportType.BUMP, ReportStatus.OPEN);
     }
 }

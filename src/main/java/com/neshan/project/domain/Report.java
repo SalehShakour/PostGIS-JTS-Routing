@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="report_type",
+@DiscriminatorColumn(name = "report_type",
         discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
 @Table(name = "reports")
@@ -37,14 +37,14 @@ public class Report {
     private ReportStatus status;
 
     @Column(name = "rating")
-    private int rating = 5;
+    private int rating;
 
     @Column(name = "type")
     private ReportType type;
 
     public Report(
-            User user, Point point,ReportType reportType,ReportStatus status
-    ){
+            User user, Point point, ReportType reportType, ReportStatus status
+    ) {
         this.user = user;
         point.setSRID(4326);
         this.point = point;
@@ -52,15 +52,5 @@ public class Report {
         this.status = status;
         this.type = reportType;
     }
-
-    public static Side getSide(double degree1, double degree2){
-        double difference = Math.abs((degree1 - degree2 + 360) % 360);
-        if (difference <= 90) {
-            return Side.SAME;
-        } else {
-            return Side.OPPOSITE;
-        }
-    }
-
 }
 
