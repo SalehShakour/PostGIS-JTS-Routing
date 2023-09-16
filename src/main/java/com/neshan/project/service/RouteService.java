@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RouteService {
     private final WKTReader wktReader;
-//    private final ReportRepository<Report> reportRepo;
+    private final ReportRepository<Report> reportRepo;
     private final ReportRepository<Accident> accidentRepo;
     private final ReportRepository<Traffic> trafficRepo;
     private final ReportRepository<Bump> bumpRepo;
@@ -41,13 +41,15 @@ public class RouteService {
 
     public List<ReportDTO> routeAnalysis(LineString lineString) {
         List<ReportDTO> pointsWithinDistance = new ArrayList<>();
-
-        List<Accident> reports = accidentRepo.findReportsWithinDistance(lineString,50);
-        for (Accident report: reports){
-            pointsWithinDistance.add(new ReportDTO(
-                    ReportType.ACCIDENT,report.getPoint().toString(),report.getAccidentSeverity().name())
-            );
-        }
+        appendReport(lineString,pointsWithinDistance);
         return pointsWithinDistance;
     }
+    private void appendReport(LineString lineString, List<ReportDTO> pointsWithinDistance){
+        List<Report> reports = reportRepo.findReportsWithinDistance(lineString,1000);
+        for (Report accident: reports){
+            pointsWithinDistance.add(new ReportDTO(
+                    accident.getType(),accident.getPoint().toString(), ""));
+        }
+    }
+
 }

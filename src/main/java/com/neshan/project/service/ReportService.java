@@ -54,7 +54,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(bumpDTO.pointDTO());
         return new Bump(
-                currentUser, point, bumpDTO.side()
+                currentUser, point
         );
     }
 
@@ -63,7 +63,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(accidentDTO.pointDTO());
         return new Accident(
-                currentUser, point, accidentDTO.severity(), accidentDTO.side()
+                currentUser, point, accidentDTO.severity()
         );
     }
 
@@ -72,7 +72,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(cameraDTO.pointDTO());
         return new Camera(
-                currentUser, point, cameraDTO.side()
+                currentUser, point
         );
     }
 
@@ -81,7 +81,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(policeDTO.pointDTO());
         return new Police(
-                currentUser, point, policeDTO.side()
+                currentUser, point
         );
     }
 
@@ -90,7 +90,7 @@ public class ReportService<T extends Report> {
 
         Point point = createPoint(trafficDTO.pointDTO());
         return new Traffic(
-                currentUser, point, trafficDTO.trafficType(), trafficDTO.side()
+                currentUser, point, trafficDTO.trafficType()
         );
     }
 

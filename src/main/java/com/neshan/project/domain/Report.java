@@ -43,7 +43,7 @@ public class Report {
     private ReportType type;
 
     public Report(
-            User user, Point point,ReportType reportType,ReportStatus status, Side side
+            User user, Point point,ReportType reportType,ReportStatus status
     ){
         this.user = user;
         point.setSRID(4326);
@@ -51,8 +51,6 @@ public class Report {
         this.creationTime = LocalDateTime.now();
         this.status = status;
         this.type = reportType;
-//        if (side.equals(Side.OPPOSITE)) degree = (degree + 180) % 360;
-//        this.degree = degree;
     }
 
     public static Side getSide(double degree1, double degree2){
