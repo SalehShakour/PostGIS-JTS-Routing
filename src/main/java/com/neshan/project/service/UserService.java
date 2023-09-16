@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -21,12 +22,13 @@ public class UserService {
     public User getUserById(String id) {
         return userValidation(id);
     }
+
     public void deleteUserById(String id) {
         userRepository.delete(userValidation(id));
     }
 
     public void updateUserById(User currentUser, UserDTO updatedUserDTO) {
-        if (userRepository.findByEmail(updatedUserDTO.email()).orElse(null) != null){
+        if (userRepository.findByEmail(updatedUserDTO.email()).orElse(null) != null) {
             throw new CustomException("This email address is unavailable");
         }
         if (updatedUserDTO.email() != null) currentUser.setEmail(updatedUserDTO.email());
@@ -35,7 +37,8 @@ public class UserService {
 
         userRepository.save(currentUser);
     }
-    public List<User> getAllUser(){
+
+    public List<User> getAllUser() {
         return userRepository.findAll();
     }
 
