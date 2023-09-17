@@ -1,30 +1,22 @@
 package com.neshan.project.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.*;
-import com.neshan.project.dto.PointDTO;
 import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.exception.CustomException;
-import com.neshan.project.myEnum.ReportType;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
 import org.locationtech.jts.geom.LineString;
-import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
-import org.locationtech.jts.operation.distance.DistanceOp;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.neshan.project.cache.CacheInitializer.expireReportIdSet;
 
 @Service
 @AllArgsConstructor
