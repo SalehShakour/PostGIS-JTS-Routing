@@ -19,7 +19,7 @@ public class Traffic extends Report {
     private TrafficType trafficType;
 
     public Traffic(User user, Point point, TrafficType type) {
-        super(user, point, ReportType.TRAFFIC, ReportStatus.OPEN);
+        super(user, point, ReportType.TRAFFIC, ReportStatus.OPEN,10);
         this.trafficType = type;
     }
 }

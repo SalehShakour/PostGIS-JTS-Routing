@@ -54,7 +54,7 @@ public class Report {
     private ReportType type;
 
     public Report(
-            User user, Point point, ReportType reportType, ReportStatus status
+            User user, Point point, ReportType reportType, ReportStatus status, int rating
     ) {
         this.user = user;
         point.setSRID(4326);
@@ -62,6 +62,7 @@ public class Report {
         this.creationTime = LocalDateTime.now();
         this.status = status;
         this.type = reportType;
+        this.rating = rating;
     }
 }
 

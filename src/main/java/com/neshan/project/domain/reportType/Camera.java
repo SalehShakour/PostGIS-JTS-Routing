@@ -17,6 +17,6 @@ import org.locationtech.jts.geom.Point;
 public class Camera extends Report {
 
     public Camera(User user, Point point) {
-        super(user, point, ReportType.CAMERA, ReportStatus.PENDING);
+        super(user, point, ReportType.CAMERA, ReportStatus.PENDING,30*60);
     }
 }
