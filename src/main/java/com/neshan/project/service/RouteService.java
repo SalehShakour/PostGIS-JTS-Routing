@@ -49,7 +49,6 @@ public class RouteService {
         for (Report report : reports) {
             if (report.getCreationTime().plusMinutes(report.getRating() * 2L)
                     .isBefore(LocalDateTime.now())) {
-                expireReportIdSet.add(report);
                 continue;
             }
             Map<String, Object> additionalInfo = new HashMap<>();
