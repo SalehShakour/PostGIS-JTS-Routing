@@ -1,10 +1,11 @@
 package com.neshan.project.controller;
 
 
+import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
-import com.neshan.project.exception.CustomException;
 import com.neshan.project.myEnum.AvailableRole;
-import com.neshan.project.repository.UserRepository;
+import com.neshan.project.myEnum.ReportStatus;
+import com.neshan.project.service.ReportService;
 import com.neshan.project.service.RoleService;
 import com.neshan.project.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')")
 public class AdminController {
-
+    private final ReportService<Report> reportService;
     private final RoleService roleService;
     private final UserService userService;
 
@@ -46,5 +47,11 @@ public class AdminController {
     public void removeEditorRole(@RequestParam String id){
         User user = userService.getUserById(id);
         roleService.removeRoleFromUser(user, AvailableRole.ROLE_EDITOR);
+    }
+
+    @PutMapping("/status")
+    public void changeReportStatus(@RequestParam Long id, @RequestParam ReportStatus newStatus){
+        reportService.updateStatus(id, newStatus);
+
     }
 }

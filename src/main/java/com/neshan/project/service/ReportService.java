@@ -6,6 +6,7 @@ import com.neshan.project.domain.User;
 import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.*;
 import com.neshan.project.exception.CustomException;
+import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.Side;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
@@ -125,5 +126,10 @@ public class ReportService<T extends Report> {
     }
 
 
+    public void updateStatus(Long id, ReportStatus newStatus) {
+        T report = repository.findById(id).orElseThrow(()->new CustomException("Report not found"));
+        report.setStatus(newStatus);
+        repository.save(report);
+    }
 }
 
