@@ -64,5 +64,16 @@ public class Report {
         this.type = reportType;
         this.rating = rating;
     }
+
+    public int getWeight(){
+        int weight;
+        switch (type){
+            case BUMP, CAMERA -> weight = 10;
+            case ACCIDENT, TRAFFIC -> weight = 2;
+            case POLICE -> weight = 5;
+            default -> weight = 1;
+        }
+        return weight;
+    }
 }
 

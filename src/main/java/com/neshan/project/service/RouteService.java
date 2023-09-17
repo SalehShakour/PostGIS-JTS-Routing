@@ -39,7 +39,7 @@ public class RouteService {
         List<ReportDTO> pointsWithinDistance = new ArrayList<>();
         List<Report> reports = reportRepo.findReportsWithinDistance(lineString, 10);
         for (Report report : reports) {
-            if (report.getCreationTime().plusMinutes(report.getRating() * 2L)
+            if (report.getCreationTime().plusMinutes((long) report.getRating() * report.getWeight())
                     .isBefore(LocalDateTime.now())) {
                 continue;
             }
