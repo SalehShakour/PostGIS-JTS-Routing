@@ -4,6 +4,7 @@ package com.neshan.project.repository;
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.Accident;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,9 @@ public interface ReportRepository<T extends Report> extends JpaRepository<T, Lon
             @Param("lineString") Geometry lineString,
             @Param("distance") double distance
     );
+
+    List<Report> findByPoint(Point point);
+
 
 }
 

@@ -12,6 +12,7 @@ import com.neshan.project.myEnum.Side;
 import jakarta.persistence.*;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
+import org.springframework.stereotype.Indexed;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,9 @@ import java.time.LocalDateTime;
 @DiscriminatorColumn(name = "report_type",
         discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
-@Table(name = "reports")
+@Table(name = "reports", indexes = {
+        @Index(name = "fn_index", columnList = "point")
+})
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

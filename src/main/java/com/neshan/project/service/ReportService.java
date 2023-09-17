@@ -15,6 +15,7 @@ import org.locationtech.jts.io.WKTReader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -31,8 +32,18 @@ public class ReportService<T extends Report> {
 
     @Transactional
     public void save(T report) {
+        List<Report> sameCoordinate = repository.findByPoint(report.getPoint());
+
+        for (Report r : sameCoordinate) {
+            if (r.getType().equals(report.getType()) &&
+                    Math.abs(ChronoUnit.MINUTES.between(r.getCreationTime(), report.getCreationTime())) <= 2) {
+                throw new CustomException("A report with the same point, type and creationTime already exists");
+            }
+        }
+
         repository.save(report);
     }
+
 
     @Transactional(readOnly = true)
     public T findById(Long id) {
