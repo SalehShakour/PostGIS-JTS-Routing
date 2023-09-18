@@ -6,6 +6,7 @@ import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.*;
 import com.neshan.project.repository.UserRepository;
 import com.neshan.project.service.ReportService;
+import com.neshan.project.service.ReportServiceDispatcher;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,46 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class ReportController {
     private final ReportService<Report> reportRepo;
-    private final ReportService<Accident> accidentService;
-    private final ReportService<Bump> bumpService;
-    private final ReportService<Camera> cameraService;
-    private final ReportService<Police> policeService;
-    private final ReportService<Traffic> trafficService;
 
+    private final ReportServiceDispatcher dispatcher;
 
-    @PostMapping("/accident")
-    public ResponseEntity<String> reportAccident(@AuthenticationPrincipal User currentUser,
-                                              @RequestBody AccidentDTO accidentDTO){
-        accidentService.save(accidentService.createAccidentObject(currentUser,accidentDTO));
+    @PostMapping("")
+    public ResponseEntity<String> createReport(@AuthenticationPrincipal User currentUser,
+                                              @RequestBody ReportDTO reportDTO){
+        reportDTO.setUser(currentUser);
+        System.out.println(reportDTO);
+        System.out.println(dispatcher.getReportServiceMap().get(reportDTO.getReportType()).getClass().getName());
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for your accident report.");
-    }
-
-    @PostMapping("/bump")
-    public ResponseEntity<String> reportBump(@AuthenticationPrincipal User currentUser,
-                                              @RequestBody BumpDTO bumpDTO){
-        bumpService.save(bumpService.createBumpObject(currentUser, bumpDTO));
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your bump report.");
-    }
-
-    @PostMapping("/camera")
-    public ResponseEntity<String> reportCamera(@AuthenticationPrincipal User currentUser,
-                                          @RequestBody CameraDTO cameraDTO){
-        cameraService.save(cameraService.createCameraObject(currentUser, cameraDTO));
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your camera report.");
-    }
-
-    @PostMapping("/police")
-    public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
-                                               @RequestBody PoliceDTO policeDTO){
-        policeService.save(policeService.createPoliceObject(currentUser, policeDTO));
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
-    }
-
-    @PostMapping("/traffic")
-    public ResponseEntity<String> reportPolice(@AuthenticationPrincipal User currentUser,
-                                               @RequestBody TrafficDTO trafficDTO){
-        trafficService.save(trafficService.createTrafficObject(currentUser, trafficDTO));
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your police report.");
     }
 
     @PutMapping("/like")
@@ -69,7 +40,7 @@ public class ReportController {
 
     @PutMapping("/dislike")
     public ResponseEntity<String> dislikeReport(@AuthenticationPrincipal User currentUser,
-                                             @RequestParam Long id){
+                                                @RequestParam Long id){
         reportRepo.updateRating(id,-1);
         return ResponseEntity.status(HttpStatus.OK).body("Thank you for sending dislike.");
     }

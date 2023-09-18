@@ -1,32 +1,32 @@
 package com.neshan.project.dto;
 
+import com.neshan.project.domain.User;
+import com.neshan.project.myEnum.AccidentSeverity;
 import com.neshan.project.myEnum.ReportType;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.neshan.project.myEnum.Side;
+import com.neshan.project.myEnum.TrafficType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
-import java.util.HashMap;
-import java.util.Map;
-
 @Getter
 @Setter
-@AllArgsConstructor
-@Builder
 public class ReportDTO {
+    private User user;
+    private ReportType reportType;
+    public PointDTO pointDTO;
+    private AccidentSeverity severity;
+    private Side side;
+    private TrafficType trafficType;
 
-    private ReportType type;
-    private String point;
-    private Map<String, Object> additionalInformation;
-
-    public ReportDTO() {
-        this.additionalInformation = new HashMap<>();
+    @Override
+    public String toString() {
+        return "ReportDTO{" +
+                "user=" + user.toString() +
+                ", reportType=" + reportType +
+                ", pointDTO=" + pointDTO.toString() +
+                ", severity=" + severity +
+                ", side=" + side +
+                ", trafficType=" + trafficType +
+                '}';
     }
 }
-

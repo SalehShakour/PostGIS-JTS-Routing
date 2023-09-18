@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
 
@@ -12,6 +13,7 @@ import com.neshan.project.myEnum.Side;
 import jakarta.persistence.*;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
+import org.springframework.stereotype.Indexed;
 
 import java.time.LocalDateTime;
 
@@ -21,9 +23,11 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "report_type",
         discriminatorType = DiscriminatorType.STRING)
-@NoArgsConstructor
-@Table(name = "reports")
-public class Report {
+@Table(name = "reports", indexes = {
+        @Index(name = "fn_index", columnList = "point")
+})
+public abstract class Report {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,15 +54,21 @@ public class Report {
     @Column(name = "type")
     private ReportType type;
 
-    public Report(
-            User user, Point point, ReportType reportType, ReportStatus status
-    ) {
-        this.user = user;
-        point.setSRID(4326);
-        this.point = point;
+
+    public Report() {
         this.creationTime = LocalDateTime.now();
-        this.status = status;
-        this.type = reportType;
+    }
+
+
+    public int getWeight(){
+        int weight;
+        switch (type){
+            case BUMP, CAMERA -> weight = 10;
+            case ACCIDENT, TRAFFIC -> weight = 2;
+            case POLICE -> weight = 5;
+            default -> weight = 1;
+        }
+        return weight;
     }
 }
 

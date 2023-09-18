@@ -1,30 +1,22 @@
 package com.neshan.project.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.*;
-import com.neshan.project.dto.PointDTO;
-import com.neshan.project.dto.ReportDTO;
+import com.neshan.project.dto.ReportResponseDTO;
 import com.neshan.project.exception.CustomException;
-import com.neshan.project.myEnum.ReportType;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
 import org.locationtech.jts.geom.LineString;
-import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
-import org.locationtech.jts.operation.distance.DistanceOp;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.neshan.project.cache.CacheInitializer.expireReportIdSet;
 
 @Service
 @AllArgsConstructor
@@ -43,13 +35,12 @@ public class RouteService {
         }
     }
 
-    public List<ReportDTO> routeAnalysis(LineString lineString) {
-        List<ReportDTO> pointsWithinDistance = new ArrayList<>();
+    public List<ReportResponseDTO> routeAnalysis(LineString lineString) {
+        List<ReportResponseDTO> pointsWithinDistance = new ArrayList<>();
         List<Report> reports = reportRepo.findReportsWithinDistance(lineString, 10);
         for (Report report : reports) {
-            if (report.getCreationTime().plusMinutes(report.getRating() * 2L)
+            if (report.getCreationTime().plusMinutes((long) report.getRating() * report.getWeight())
                     .isBefore(LocalDateTime.now())) {
-                expireReportIdSet.add(report);
                 continue;
             }
             Map<String, Object> additionalInfo = new HashMap<>();
@@ -61,7 +52,7 @@ public class RouteService {
                 }
             }
 
-            pointsWithinDistance.add(new ReportDTO(
+            pointsWithinDistance.add(new ReportResponseDTO(
                     report.getType(),
                     report.getPoint().toString(),
                     additionalInfo
