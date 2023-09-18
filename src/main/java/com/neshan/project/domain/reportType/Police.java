@@ -14,7 +14,10 @@ import org.locationtech.jts.geom.Point;
 @DiscriminatorValue("POLICE")
 @Getter
 @Setter
-@NoArgsConstructor
-public class Police extends Report {
 
+public class Police extends Report {
+    public Police() {
+        this.setRating(20);
+        this.setStatus(ReportStatus.OPEN);
+    }
 }

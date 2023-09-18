@@ -18,6 +18,7 @@ public class PointConverter {
         String wellKnownText = String.format("POINT(%.6f %.6f)", pointDTO.getX(), pointDTO.getY());
         try {
             point = (Point) wktReader.read(wellKnownText);
+            point.setSRID(4326);
         } catch (ParseException e) {
             throw new CustomException(e.getMessage());
         }

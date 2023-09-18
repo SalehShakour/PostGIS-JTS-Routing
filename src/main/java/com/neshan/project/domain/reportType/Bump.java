@@ -17,8 +17,11 @@ import org.locationtech.jts.geom.Point;
 @DiscriminatorValue("BUMP")
 @Getter
 @Setter
-@NoArgsConstructor
+
 public class Bump extends Report {
 
-
+    public Bump() {
+        this.setRating(10);
+        this.setStatus(ReportStatus.OPEN);
+    }
 }

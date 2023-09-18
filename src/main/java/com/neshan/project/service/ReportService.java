@@ -33,7 +33,6 @@ public class ReportService<T extends Report> {
 
     @Transactional
     public void save(T report) {
-        System.out.println(report.getPoint().toString());
         List<Report> sameCoordinate = repository.findByPoint(report.getPoint());
 
         for (Report r : sameCoordinate) {
@@ -76,7 +75,6 @@ public class ReportService<T extends Report> {
         report.setStatus(newStatus);
         repository.save(report);
     }
-
 
 }
 
