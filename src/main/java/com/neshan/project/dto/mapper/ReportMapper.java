@@ -3,9 +3,8 @@ package com.neshan.project.dto.mapper;
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.ReportDTO;
-import com.neshan.project.converter.converter.PointConverter;
+import com.neshan.project.converter.PointConverter;
 import com.neshan.project.dto.ReportResponseDTO;
-import org.mapstruct.factory.Mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,29 +19,29 @@ public interface ReportMapper {
     @Mapping(target = "accidentSeverity", source = "severity")
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.converter.PointConverter.convert(reportDTO.pointDTO))")
+            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Accident reportDTOToAccident(ReportDTO reportDTO);
 
 
     @Mapping(target = "trafficType", source = "trafficType")
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.converter.PointConverter.convert(reportDTO.pointDTO))")
+            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Traffic reportDTOToTraffic(ReportDTO reportDTO);
 
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.converter.PointConverter.convert(reportDTO.pointDTO))")
+            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Bump reportDTOToBump(ReportDTO reportDTO);
 
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.converter.PointConverter.convert(reportDTO.pointDTO))")
+            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Camera reportDTOToCamera(ReportDTO reportDTO);
 
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.converter.PointConverter.convert(reportDTO.pointDTO))")
+            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Police reportDTOToPolice(ReportDTO reportDTO);
 
 
