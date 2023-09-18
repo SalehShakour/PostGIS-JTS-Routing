@@ -2,6 +2,7 @@ package com.neshan.project.domain.reportType;
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
+import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.myEnum.*;
 import jakarta.persistence.*;
 
@@ -16,7 +17,4 @@ import org.locationtech.jts.geom.Point;
 @NoArgsConstructor
 public class Police extends Report {
 
-    public Police(User user, Point point) {
-        super(user, point, ReportType.POLICE, ReportStatus.OPEN,30);
-    }
 }

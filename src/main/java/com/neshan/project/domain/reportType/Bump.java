@@ -2,6 +2,7 @@ package com.neshan.project.domain.reportType;
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
+import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
 import com.neshan.project.myEnum.Side;
@@ -19,7 +20,5 @@ import org.locationtech.jts.geom.Point;
 @NoArgsConstructor
 public class Bump extends Report {
 
-    public Bump(User user, Point point) {
-        super(user, point, ReportType.BUMP, ReportStatus.OPEN,15);
-    }
+
 }

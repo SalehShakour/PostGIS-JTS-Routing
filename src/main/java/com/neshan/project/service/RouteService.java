@@ -2,7 +2,7 @@ package com.neshan.project.service;
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.reportType.*;
-import com.neshan.project.dto.ReportDTO;
+import com.neshan.project.dto.ReportResponseDTO;
 import com.neshan.project.exception.CustomException;
 import com.neshan.project.repository.ReportRepository;
 import lombok.AllArgsConstructor;
@@ -35,8 +35,8 @@ public class RouteService {
         }
     }
 
-    public List<ReportDTO> routeAnalysis(LineString lineString) {
-        List<ReportDTO> pointsWithinDistance = new ArrayList<>();
+    public List<ReportResponseDTO> routeAnalysis(LineString lineString) {
+        List<ReportResponseDTO> pointsWithinDistance = new ArrayList<>();
         List<Report> reports = reportRepo.findReportsWithinDistance(lineString, 10);
         for (Report report : reports) {
             if (report.getCreationTime().plusMinutes((long) report.getRating() * report.getWeight())
@@ -52,7 +52,7 @@ public class RouteService {
                 }
             }
 
-            pointsWithinDistance.add(new ReportDTO(
+            pointsWithinDistance.add(new ReportResponseDTO(
                     report.getType(),
                     report.getPoint().toString(),
                     additionalInfo

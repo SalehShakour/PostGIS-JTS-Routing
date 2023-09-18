@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.myEnum.ReportStatus;
 import com.neshan.project.myEnum.ReportType;
 
@@ -22,11 +23,11 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "report_type",
         discriminatorType = DiscriminatorType.STRING)
-@NoArgsConstructor
 @Table(name = "reports", indexes = {
         @Index(name = "fn_index", columnList = "point")
 })
-public class Report {
+public abstract class Report {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,17 +54,11 @@ public class Report {
     @Column(name = "type")
     private ReportType type;
 
-    public Report(
-            User user, Point point, ReportType reportType, ReportStatus status, int rating
-    ) {
-        this.user = user;
-        point.setSRID(4326);
-        this.point = point;
+
+    public Report() {
         this.creationTime = LocalDateTime.now();
-        this.status = status;
-        this.type = reportType;
-        this.rating = rating;
     }
+
 
     public int getWeight(){
         int weight;
