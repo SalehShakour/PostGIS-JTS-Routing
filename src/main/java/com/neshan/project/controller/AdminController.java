@@ -49,6 +49,7 @@ public class AdminController {
         roleService.removeRoleFromUser(user, AvailableRole.ROLE_EDITOR);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN', 'ROLE_ADMIN','ROLE_EDITOR')")
     @PutMapping("/status")
     public void changeReportStatus(@RequestParam Long id, @RequestParam ReportStatus newStatus){
         reportService.updateStatus(id, newStatus);
