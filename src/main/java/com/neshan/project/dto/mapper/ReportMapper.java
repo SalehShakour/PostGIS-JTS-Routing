@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Mapper(uses = PointConverter.class, componentModel = "spring")
 public interface ReportMapper {
-    ReportMapper INSTANCE = Mappers.getMapper(ReportMapper.class);
 
     @Mapping(target = "accidentSeverity", source = "severity")
     @Mapping(target = "type", source = "reportType")
