@@ -48,9 +48,4 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public WKTReader wktReader(){
-        return new WKTReader();
-    }
 }

@@ -9,7 +9,6 @@ import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 
 @Component
-
 public class PointConverter {
     private static final WKTReader wktReader = new WKTReader();
 
