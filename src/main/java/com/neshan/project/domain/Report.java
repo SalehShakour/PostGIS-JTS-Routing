@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @Table(name = "reports", indexes = {
         @Index(name = "fn_index", columnList = "point")
 })
-public abstract class Report {
+public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public abstract class Report {
     private User user;
 
     @Column(name = "point")
-    private Point point;
+    public Point point;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

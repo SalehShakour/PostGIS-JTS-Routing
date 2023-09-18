@@ -14,7 +14,9 @@ import org.locationtech.jts.geom.Point;
 @DiscriminatorValue("CAMERA")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Camera extends Report {
-
+    public Camera() {
+        this.setRating(10);
+        this.setStatus(ReportStatus.PENDING);
+    }
 }

@@ -13,9 +13,12 @@ import org.locationtech.jts.geom.Point;
 @DiscriminatorValue("TRAFFIC")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Traffic extends Report {
 
     private TrafficType trafficType;
 
+    public Traffic() {
+        this.setRating(10);
+        this.setStatus(ReportStatus.OPEN);
+    }
 }

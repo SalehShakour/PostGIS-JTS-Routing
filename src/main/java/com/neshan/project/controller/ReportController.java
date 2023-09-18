@@ -22,13 +22,14 @@ public class ReportController {
 
     private final ReportServiceDispatcher dispatcher;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<String> createReport(@AuthenticationPrincipal User currentUser,
                                               @RequestBody ReportDTO reportDTO){
         reportDTO.setUser(currentUser);
-        System.out.println(reportDTO);
-        System.out.println(dispatcher.getReportServiceMap().get(reportDTO.getReportType()).getClass().getName());
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for your accident report.");
+        dispatcher.dispatchAndSave(reportDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                String.format("Thank you for your %s report.",reportDTO.getReportType().name())
+        );
     }
 
     @PutMapping("/like")

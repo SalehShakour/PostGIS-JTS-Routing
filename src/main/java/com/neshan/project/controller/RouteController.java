@@ -19,7 +19,7 @@ public class RouteController {
     @PostMapping
     public ResponseEntity<List<ReportResponseDTO>> showRelatedReport(@RequestBody String linestringWkt){
         return ResponseEntity.status(HttpStatus.OK).body(
-                routeService.routeAnalysis(routeService.toLinestring(linestringWkt))
+                routeService.routeAnalysis(routeService.getAllReports(routeService.toLinestring(linestringWkt)))
         );
     }
 }

@@ -15,8 +15,11 @@ import org.locationtech.jts.geom.Point;
 @DiscriminatorValue("ACCIDENT")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Accident extends Report {
     private AccidentSeverity accidentSeverity;
 
+    public Accident() {
+        this.setRating(5);
+        this.setStatus(ReportStatus.OPEN);
+    }
 }
