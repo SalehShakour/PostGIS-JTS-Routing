@@ -26,6 +26,7 @@ public class ReportService<T extends Report> {
 
     private final ReportRepository<T> repository;
     private final WKTReader wktReader;
+    private final ReportMapper mapper;
 
     public T reportValidation(Long id) {
         return repository.findById(id)
@@ -64,11 +65,9 @@ public class ReportService<T extends Report> {
 
     public void updateRating(Long id, int number){
         T report = repository.findById(id).orElseThrow(()->new CustomException("Report not found."));
-        report.setRating(report.getRating()+number);
+        report.setRating(report.getRating()+(number*report.getWeight()));
         repository.save(report);
     }
-
-
 
 
     public void updateStatus(Long id, ReportStatus newStatus) {
@@ -77,5 +76,9 @@ public class ReportService<T extends Report> {
         repository.save(report);
     }
 
+    public List<ReportResponseDTO> getAllPendingReports() {
+        List<Report> pendingReports = repository.getAllPendingReports();
+        return mapper.toReportResponseDTOList(pendingReports);
+    }
 }
 

@@ -42,16 +42,7 @@ public class RouteService {
 
 
     public List<ReportResponseDTO> routeAnalysis(List<Report> reports) {
-        List<ReportResponseDTO> response = new ArrayList<>();
-        for (Report report : reports) {
-            if (report.getCreationTime().plusMinutes((long) report.getRating() * report.getWeight())
-                    .isBefore(LocalDateTime.now())) {
-                continue;
-            }
-            response.add(mapper.toReportResponseDTO(report));
-        }
-
-        return response;
+        return mapper.toReportResponseDTOList(reports);
     }
 
 
