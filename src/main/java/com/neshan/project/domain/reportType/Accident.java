@@ -3,6 +3,7 @@ package com.neshan.project.domain.reportType;
 
 import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
+import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.myEnum.*;
 import jakarta.persistence.*;
 
@@ -11,17 +12,14 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 
 @Entity
-@DiscriminatorValue("accident")
+@DiscriminatorValue("ACCIDENT")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Accident extends Report {
+    private AccidentSeverity accidentSeverity;
 
-    private AccidentSeverity severity;
-
-    public Accident(User user, Point point, AccidentSeverity severity) {
-        super(user, point, ReportStatus.PENDING, ReportType.ACCIDENT);
-        this.severity = severity;
+    public Accident() {
+        this.setRating(5);
+        this.setStatus(ReportStatus.OPEN);
     }
-
 }

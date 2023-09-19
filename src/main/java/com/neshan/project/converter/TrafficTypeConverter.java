@@ -1,4 +1,4 @@
-package com.neshan.project.myEnum.converter;
+package com.neshan.project.converter;
 
 import com.neshan.project.myEnum.TrafficType;
 
