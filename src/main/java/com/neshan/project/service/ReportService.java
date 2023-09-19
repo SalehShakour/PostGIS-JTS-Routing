@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,7 +72,7 @@ public class ReportService<T extends Report> {
 
 
     public void updateStatus(Long id, ReportStatus newStatus) {
-        T report = repository.findById(id).orElseThrow(()->new CustomException("Report not found"));
+        T report = reportValidation(id);
         report.setStatus(newStatus);
         repository.save(report);
     }

@@ -1,10 +1,12 @@
 package com.neshan.project.service;
 
+import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.dto.UserDTO;
 import com.neshan.project.exception.CustomException;
 import com.neshan.project.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +44,4 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    //todo get all reports
 }
