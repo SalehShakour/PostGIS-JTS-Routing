@@ -14,6 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class ReportResponseDTO {
 
+    private Long id;
     private ReportType type;
     private String point;
     private Map<String, Object> additionalInformation;
