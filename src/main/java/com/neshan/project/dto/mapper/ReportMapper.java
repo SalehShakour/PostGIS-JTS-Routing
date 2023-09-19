@@ -6,10 +6,13 @@ import com.neshan.project.dto.ReportDTO;
 import com.neshan.project.converter.PointConverter;
 import com.neshan.project.dto.ReportResponseDTO;
 
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -49,7 +52,12 @@ public interface ReportMapper {
     @Mapping(target = "additionalInformation", expression = "java(mapAdditionalInfo(report))")
     @Mapping(target = "point",
             expression = "java(report.point.toString())")
+    @Named("toReportResponseDTO")
     ReportResponseDTO toReportResponseDTO(Report report);
+
+    @IterableMapping(qualifiedByName = "toReportResponseDTO")
+    List<ReportResponseDTO> toReportResponseDTOList(List<Report> reports);
+
 
     default Map<String, Object> mapAdditionalInfo(Report report) {
         Map<String, Object> additionalInfo = new HashMap<>();
