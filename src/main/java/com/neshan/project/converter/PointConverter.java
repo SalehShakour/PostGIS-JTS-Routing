@@ -10,7 +10,7 @@ import org.locationtech.jts.io.WKTReader;
 
 @Component
 public class PointConverter {
-    private static final WKTReader wktReader = new WKTReader();
+    public static final WKTReader wktReader = new WKTReader();
 
     public static Point convert(PointDTO pointDTO) {
         Point point;
