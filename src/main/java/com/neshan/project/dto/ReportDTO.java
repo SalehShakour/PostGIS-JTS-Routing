@@ -3,7 +3,6 @@ package com.neshan.project.dto;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.neshan.project.domain.User;
-import com.neshan.project.myEnum.AccidentSeverity;
 import com.neshan.project.myEnum.ReportType;
 import com.neshan.project.myEnum.Side;
 import com.neshan.project.myEnum.TrafficType;
