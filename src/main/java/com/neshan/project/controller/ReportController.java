@@ -33,18 +33,21 @@ public class ReportController {
         );
     }
 
-    @PutMapping("/like")
-    public ResponseEntity<String> likeReport(@AuthenticationPrincipal User currentUser,
-                                             @RequestParam Long id){
-        reportRepo.updateRating(id,1);
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for sending like.");
-    }
 
-    @PutMapping("/dislike")
-    public ResponseEntity<String> dislikeReport(@AuthenticationPrincipal User currentUser,
+    @PutMapping("/{rateType}")
+    public ResponseEntity<String> rateReport(@AuthenticationPrincipal User currentUser,
+                                                @PathVariable String rateType,
                                                 @RequestParam Long id){
-        reportRepo.updateRating(id,-1);
-        return ResponseEntity.status(HttpStatus.OK).body("Thank you for sending dislike.");
+        switch (rateType){
+            case "like"->{
+                reportRepo.updateRating(id,1);
+            }
+            case "dislike"->{
+                reportRepo.updateRating(id,-1);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Thank you for rating.");
     }
 
 }
