@@ -19,17 +19,16 @@ import java.util.Map;
 @Mapper(uses = PointConverter.class, componentModel = "spring")
 public interface ReportMapper {
 
-    @Mapping(target = "accidentSeverity", source = "severity")
+    @Mapping(target = "accidentSeverity", expression = "java(com.neshan.project.myEnum.AccidentSeverity.getEnum(reportDTO.getProperties().get(\"severity\")))")
     @Mapping(target = "type", source = "reportType")
     @Mapping(target = "point",
             expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Accident reportDTOToAccident(ReportDTO reportDTO);
 
 
-    @Mapping(target = "trafficType", source = "trafficType")
+    @Mapping(target = "trafficType", expression = "java(com.neshan.project.myEnum.TrafficType.getEnum(reportDTO.getProperties().get(\"trafficType\")))")
     @Mapping(target = "type", source = "reportType")
-    @Mapping(target = "point",
-            expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
+    @Mapping(target = "point", expression = "java(com.neshan.project.converter.PointConverter.convert(reportDTO.pointDTO))")
     Traffic reportDTOToTraffic(ReportDTO reportDTO);
 
     @Mapping(target = "type", source = "reportType")
