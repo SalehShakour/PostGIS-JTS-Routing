@@ -4,6 +4,7 @@ import com.neshan.project.domain.Report;
 import com.neshan.project.domain.User;
 import com.neshan.project.domain.reportType.*;
 import com.neshan.project.dto.*;
+import com.neshan.project.myEnum.ReportType;
 import com.neshan.project.repository.UserRepository;
 import com.neshan.project.service.ReportService;
 import com.neshan.project.service.ReportServiceDispatcher;

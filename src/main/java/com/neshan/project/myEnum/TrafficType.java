@@ -20,5 +20,14 @@ public enum TrafficType {
                     + "] not supported.");
         };
     }
+    public static TrafficType getEnum(String stringEnum){
+        return switch (stringEnum) {
+            case "LOCKED" -> TrafficType.LOCKED;
+            case "NORMAL" -> TrafficType.NORMAL;
+            case "SMOOTH" -> TrafficType.SMOOTH;
+            default -> throw new IllegalArgumentException("string [" + stringEnum
+                    + "] not supported.");
+        };
+    }
 
 }

@@ -19,4 +19,12 @@ public enum AccidentSeverity {
                     + "] not supported.");
         };
     }
+    public static AccidentSeverity getEnum(String stringEnum){
+        return switch (stringEnum) {
+            case "LIGHT" -> AccidentSeverity.LIGHT;
+            case "HEAVY" -> AccidentSeverity.HEAVY;
+            default -> throw new IllegalArgumentException("string [" + stringEnum
+                    + "] not supported.");
+        };
+    }
 }
